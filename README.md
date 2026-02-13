@@ -9,7 +9,7 @@ Skillzees is a portable collection of Claude Code slash commands that bring staf
 ## Quick Install
 
 ```bash
-git clone https://github.com/YOUR_ORG/skillzees.git /tmp/skillzees
+git clone https://github.com/msifoss/skillzees.git /tmp/skillzees
 bash /tmp/skillzees/install.sh --from /tmp/skillzees
 ```
 
