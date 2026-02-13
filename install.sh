@@ -113,29 +113,33 @@ if [ ! -d "$SOURCE_DIR" ]; then
     exit 1
 fi
 
-# Expected command files
+# Expected command files (source_name:install_name)
+# Most files keep their name. generate-readme.md installs as readme.md
+# to avoid case-insensitive collision with repo README.md on macOS.
 COMMANDS=(
-    "init-project.md"
-    "five-persona-review.md"
-    "security-audit.md"
-    "pm.md"
-    "budget.md"
-    "bolt-review.md"
-    "changelog.md"
-    "cost-estimate.md"
-    "readme.md"
-    "captainslog.md"
+    "init-project.md:init-project.md"
+    "five-persona-review.md:five-persona-review.md"
+    "security-audit.md:security-audit.md"
+    "pm.md:pm.md"
+    "budget.md:budget.md"
+    "bolt-review.md:bolt-review.md"
+    "changelog.md:changelog.md"
+    "cost-estimate.md:cost-estimate.md"
+    "generate-readme.md:readme.md"
+    "captainslog.md:captainslog.md"
 )
 
 # List mode
 if [ "$LIST_ONLY" = true ]; then
     echo -e "${BOLD}Callhero Standard — Available Commands${NC}"
     echo ""
-    for cmd in "${COMMANDS[@]}"; do
-        name="${cmd%.md}"
-        if [ -f "${COMMANDS_DIR}/${cmd}" ]; then
+    for entry in "${COMMANDS[@]}"; do
+        src_file="${entry%%:*}"
+        dst_file="${entry##*:}"
+        name="${dst_file%.md}"
+        if [ -f "${COMMANDS_DIR}/${dst_file}" ]; then
             echo -e "  ${GREEN}✓${NC} /${name} (installed)"
-        elif [ -f "${SOURCE_DIR}/${cmd}" ]; then
+        elif [ -f "${SOURCE_DIR}/${src_file}" ]; then
             echo -e "  ${YELLOW}○${NC} /${name} (available)"
         else
             echo -e "  ${RED}✗${NC} /${name} (not found in source)"
@@ -147,10 +151,12 @@ fi
 # Uninstall mode
 if [ "$UNINSTALL" = true ]; then
     echo -e "${BOLD}Uninstalling Callhero Standard commands...${NC}"
-    for cmd in "${COMMANDS[@]}"; do
-        if [ -f "${COMMANDS_DIR}/${cmd}" ]; then
-            rm "${COMMANDS_DIR}/${cmd}"
-            echo -e "  ${RED}✗${NC} Removed /${cmd%.md}"
+    for entry in "${COMMANDS[@]}"; do
+        dst_file="${entry##*:}"
+        name="${dst_file%.md}"
+        if [ -f "${COMMANDS_DIR}/${dst_file}" ]; then
+            rm "${COMMANDS_DIR}/${dst_file}"
+            echo -e "  ${RED}✗${NC} Removed /${name}"
         fi
     done
     echo -e "\n${GREEN}Done.${NC} Commands removed. Claude Code will no longer show these slash commands."
@@ -171,10 +177,12 @@ echo -e "${BLUE}Source:${NC} ${SOURCE_DIR}"
 echo ""
 
 # Step 2: Copy command files
-for cmd in "${COMMANDS[@]}"; do
-    src="${SOURCE_DIR}/${cmd}"
-    dst="${COMMANDS_DIR}/${cmd}"
-    name="${cmd%.md}"
+for entry in "${COMMANDS[@]}"; do
+    src_file="${entry%%:*}"
+    dst_file="${entry##*:}"
+    src="${SOURCE_DIR}/${src_file}"
+    dst="${COMMANDS_DIR}/${dst_file}"
+    name="${dst_file%.md}"
 
     if [ ! -f "$src" ]; then
         echo -e "  ${YELLOW}⚠${NC}  /${name} — not found in source, skipping"
@@ -218,10 +226,11 @@ for src in "${SOURCE_DIR}"/*.md; do
     [ -f "$src" ] || continue
     cmd="$(basename "$src")"
 
-    # Skip if already handled
+    # Skip if already handled via COMMANDS mapping
     skip=false
-    for known in "${COMMANDS[@]}"; do
-        if [ "$cmd" = "$known" ]; then
+    for entry in "${COMMANDS[@]}"; do
+        src_file="${entry%%:*}"
+        if [ "$cmd" = "$src_file" ]; then
             skip=true
             break
         fi
@@ -230,8 +239,8 @@ for src in "${SOURCE_DIR}"/*.md; do
         continue
     fi
 
-    # Skip install.sh itself (this file's companion)
-    if [ "$cmd" = "install.md" ]; then
+    # Skip the repo README (not a command file)
+    if [ "$cmd" = "README.md" ]; then
         continue
     fi
 
@@ -260,8 +269,9 @@ echo ""
 # Step 5: Verify
 echo -e "${BOLD}Verification:${NC}"
 TOTAL=0
-for cmd in "${COMMANDS[@]}"; do
-    if [ -f "${COMMANDS_DIR}/${cmd}" ]; then
+for entry in "${COMMANDS[@]}"; do
+    dst_file="${entry##*:}"
+    if [ -f "${COMMANDS_DIR}/${dst_file}" ]; then
         ((TOTAL++))
     fi
 done
@@ -273,8 +283,9 @@ if [ "$TOTAL" -eq "${#COMMANDS[@]}" ]; then
     echo ""
     echo "These slash commands are now available in Claude Code:"
     echo ""
-    for cmd in "${COMMANDS[@]}"; do
-        echo "  /${cmd%.md}"
+    for entry in "${COMMANDS[@]}"; do
+        dst_file="${entry##*:}"
+        echo "  /${dst_file%.md}"
     done
     echo ""
     echo "Try: claude and then type /init-project my-new-app"
