@@ -32,6 +32,7 @@ That's it. All commands are immediately available as `/command-name` in any Clau
 | **`/init-project`** | Scaffold a new project with CI, tests, docs, PM framework, security policy, and budget tracking |
 | **`/readme`** | Generate a comprehensive, Will-Larson-quality README |
 | **`/changelog`** | Update CHANGELOG.md from git history (Keep a Changelog format) |
+| **`/docs`** | Generate and maintain all project documentation (README, CHANGELOG, SECURITY, audience-specific manuals) |
 
 ### Code Quality
 
@@ -39,6 +40,8 @@ That's it. All commands are immediately available as `/command-name` in any Clau
 |---|---|
 | **`/five-persona-review`** | Deep code review from 5 expert perspectives: Staff Engineer, First Principles, Radical Transparency, CTO/Security, SRE/DevOps |
 | **`/security-audit`** | Structured security audit covering auth, input validation, secrets, encryption, network, infrastructure, dependencies, monitoring, and operations |
+| **`/dlc-audit`** | AI-DLC compliance audit — 8-dimension process adherence assessment with foundation bootstrapping |
+| **`/motherhen`** | Development lifecycle compliance monitor — 7-check dashboard with PASS/WARN/FAIL grading |
 
 ### Project Management
 
@@ -47,6 +50,7 @@ That's it. All commands are immediately available as `/command-name` in any Clau
 | **`/pm`** | Bolt-based sprint management — plan, status, close, backlog grooming, metrics |
 | **`/bolt-review`** | End-of-sprint comprehensive review (code + security + docs + budget) |
 | **`/captainslog`** | Session logs that preserve context between AI conversations |
+| **`/ticky`** | Submit work items (tickets) to Azure DevOps with proper formatting and assignment |
 
 ### Planning & Cost
 
@@ -54,6 +58,12 @@ That's it. All commands are immediately available as `/command-name` in any Clau
 |---|---|
 | **`/budget`** | Infrastructure cost tracking, per-resource breakdowns, optimization analysis |
 | **`/cost-estimate`** | Development effort estimation with T-shirt sizes and AI-pair benchmarks |
+
+### Operations
+
+| Command | Purpose |
+|---|---|
+| **`/prodstatus`** | Production health dashboard — read-only AWS infrastructure diagnostics |
 
 ---
 
@@ -164,6 +174,11 @@ Commands install to `~/.claude/commands/` with these names:
 | `cost-estimate.md` | `cost-estimate.md` | `/cost-estimate` |
 | `generate-readme.md` | `readme.md` | `/readme` |
 | `captainslog.md` | `captainslog.md` | `/captainslog` |
+| `docs.md` | `docs.md` | `/docs` |
+| `dlc-audit.md` | `dlc-audit.md` | `/dlc-audit` |
+| `motherhen.md` | `motherhen.md` | `/motherhen` |
+| `prodstatus.md` | `prodstatus.md` | `/prodstatus` |
+| `ticky.md` | `ticky.md` | `/ticky` |
 
 > **Note:** `generate-readme.md` is renamed to `readme.md` during install to avoid conflicting with the repo's own `README.md` on case-insensitive filesystems (macOS).
 

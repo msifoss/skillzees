@@ -27,6 +27,11 @@
 #   /cost-estimate        Development effort estimation
 #   /readme               Will-Larson-quality README generation
 #   /captainslog          Session logs for AI context continuity
+#   /docs                 Documentation generation and maintenance
+#   /dlc-audit            AI-DLC compliance audit (8-dimension assessment)
+#   /motherhen            Development lifecycle compliance monitor
+#   /prodstatus           Production health dashboard (read-only AWS diagnostics)
+#   /ticky                Azure DevOps work item submission
 # ============================================================================
 
 set -euo pipefail
@@ -127,6 +132,11 @@ COMMANDS=(
     "cost-estimate.md:cost-estimate.md"
     "generate-readme.md:readme.md"
     "captainslog.md:captainslog.md"
+    "docs.md:docs.md"
+    "dlc-audit.md:dlc-audit.md"
+    "motherhen.md:motherhen.md"
+    "prodstatus.md:prodstatus.md"
+    "ticky.md:ticky.md"
 )
 
 # List mode
