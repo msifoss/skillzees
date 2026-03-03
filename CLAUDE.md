@@ -43,6 +43,7 @@ skillzees/
 | `/budget` | `budget.md` | Planning & Cost |
 | `/cost-estimate` | `cost-estimate.md` | Planning & Cost |
 | `/prodstatus` | `prodstatus.md` | Operations |
+| `/arch-audit` | `arch-audit.md` | Code Quality |
 
 ## Conventions
 
@@ -55,6 +56,6 @@ skillzees/
 ## Current State
 
 - **Version:** v1.0.0
-- **Commands:** 15
+- **Commands:** 16
 - **Origin:** Born from the [callhero](https://dev.azure.com/membersolutionsinc/DevOps/_git/callsync-hubspot) project
 - **License:** MIT

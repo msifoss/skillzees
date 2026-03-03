@@ -32,6 +32,7 @@
 #   /motherhen            Development lifecycle compliance monitor
 #   /prodstatus           Production health dashboard (read-only AWS diagnostics)
 #   /ticky                Azure DevOps work item submission
+#   /arch-audit           Multi-persona architectural audit
 # ============================================================================
 
 set -euo pipefail
@@ -137,6 +138,7 @@ COMMANDS=(
     "motherhen.md:motherhen.md"
     "prodstatus.md:prodstatus.md"
     "ticky.md:ticky.md"
+    "arch-audit.md:arch-audit.md"
 )
 
 # List mode
