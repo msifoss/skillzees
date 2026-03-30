@@ -8,7 +8,7 @@ Usage: `/security-audit [scope]`
 
 ## Purpose
 
-Conducts a structured security audit following the methodology that produced 155 findings across 4 rounds in the callhero project. This audit checks OWASP Top 10, cloud-specific risks, supply chain security, and operational security controls.
+Conducts a structured security audit following the methodology that produced 155 findings across 4 rounds in the AI-DLC reference project. This audit checks OWASP Top 10, cloud-specific risks, supply chain security, and operational security controls.
 
 ---
 

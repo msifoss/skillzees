@@ -16,9 +16,9 @@
 #   2. Copies all .md command files into that directory
 #   3. Verifies installation
 #
-# Skills installed:
-#   /init-project         Full project scaffold (callhero standard)
-#   /five-persona-review  Multi-perspective code review (5 expert personas)
+# Skills installed (30 commands):
+#   /init-project         Full project scaffold (AI-DLC standard)
+#   /five-persona-review  Multi-perspective code review (12 expert personas)
 #   /security-audit       Structured security audit (OWASP + cloud + supply chain)
 #   /pm                   Bolt sprint management
 #   /budget               Infrastructure cost tracking
@@ -31,8 +31,22 @@
 #   /dlc-audit            AI-DLC compliance audit (8-dimension assessment)
 #   /motherhen            Development lifecycle compliance monitor
 #   /prodstatus           Production health dashboard (read-only AWS diagnostics)
-#   /ticky                Azure DevOps work item submission
+#   /ticky                Azure DevOps work item lifecycle management
 #   /arch-audit           Multi-persona architectural audit
+#   /am                   Account manager daily/weekly workflow
+#   /bolt-lfg             Autonomous Bolt engineering pipeline
+#   /brainstorm           Explore before you plan — structured brainstorming
+#   /create-skill         Scaffold a new skill or command
+#   /deepen-plan          Parallel research to strengthen any plan
+#   /exec-review          Executive review panel (5 strategic thinkers)
+#   /generate-command     Quick-create a lightweight command
+#   /heal-skill           Diagnose and fix broken skills
+#   /monthly-refresh      Datalake monthly data refresh
+#   /prd-go               Write production-ready PRDs
+#   /quickstart           Get started in 60 seconds
+#   /setup                Configure AI-DLC per-project settings
+#   /slfg                 Swarm mode autonomous pipeline
+#   /staff-panel          Staff engineer panel analysis
 # ============================================================================
 
 set -euo pipefail
@@ -139,6 +153,20 @@ COMMANDS=(
     "prodstatus.md:prodstatus.md"
     "ticky.md:ticky.md"
     "arch-audit.md:arch-audit.md"
+    "am.md:am.md"
+    "bolt-lfg.md:bolt-lfg.md"
+    "brainstorm.md:brainstorm.md"
+    "create-skill.md:create-skill.md"
+    "deepen-plan.md:deepen-plan.md"
+    "exec-review.md:exec-review.md"
+    "generate-command.md:generate-command.md"
+    "heal-skill.md:heal-skill.md"
+    "monthly-refresh.md:monthly-refresh.md"
+    "prd-go.md:prd-go.md"
+    "quickstart.md:quickstart.md"
+    "setup.md:setup.md"
+    "slfg.md:slfg.md"
+    "staff-panel.md:staff-panel.md"
 )
 
 # List mode

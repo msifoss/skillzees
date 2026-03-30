@@ -8,7 +8,7 @@ Usage: `/pm [action]`
 
 ## Purpose
 
-Manages the Bolt-based sprint framework. Keeps PM artifacts (`docs/pm/`) in sync with actual work. This is the lightweight-but-rigorous process that kept callhero on track through 16 Bolts, 155 security findings, and production deployment.
+Manages the Bolt-based sprint framework. Keeps PM artifacts (`docs/pm/`) in sync with actual work. This is the lightweight-but-rigorous process proven through 16 Bolts, 155 security findings, and production deployment in the AI-DLC reference project.
 
 ---
 
@@ -87,16 +87,50 @@ git log --oneline -20
 # Any open blocked items from backlog
 ```
 
-### Step 3: Read Backlog
+### Step 3: Check for Brainstorm Documents
+
+Before planning, check for recent brainstorm documents that should inform this bolt:
+
+```bash
+ls -la docs/brainstorms/*.md 2>/dev/null | head -10
+```
+
+**If brainstorm documents exist (created within last 14 days):**
+1. Read the most recent brainstorm thoroughly
+2. Announce: "Found brainstorm from [date]: [topic]. Using as foundation for planning."
+3. Carry forward:
+   - Key decisions and rationale
+   - Chosen approach and why alternatives were rejected
+   - Constraints and requirements discovered
+   - Open questions (flag for resolution during planning)
+   - Success criteria and scope boundaries
+4. Reference specific decisions: `(see brainstorm: docs/brainstorms/<filename>)`
+
+**If no brainstorm exists:** Proceed normally to Step 4.
+
+### Step 3b: Search Past Learnings
+
+Search for relevant knowledge from prior bolts:
+
+```bash
+# Check solution documents for relevant patterns
+ls docs/solutions/ 2>/dev/null
+# Check recent captain's logs for context
+ls -1 docs/captains_log/caplog-*.txt 2>/dev/null | tail -3
+```
+
+If relevant prior solutions or logs exist, surface them during planning — this prevents repeating past mistakes and compounds knowledge.
+
+### Step 4: Read Backlog
 Read `docs/pm/BACKLOG.md` and identify top executable (🟢) items.
 
-### Step 4: Ask Planning Questions
+### Step 5: Ask Planning Questions
 1. What's the Bolt Goal? (one sentence describing the shippable outcome)
-2. Which backlog items are we pulling in? (show top candidates)
+2. Which backlog items are we pulling in? (show top candidates, highlight any that relate to brainstorm decisions)
 3. Any new items to add?
 4. Any blockers to track?
 
-### Step 5: Write CURRENT-SPRINT.md
+### Step 6: Write CURRENT-SPRINT.md
 
 ```markdown
 # Bolt [N] — [Name] ([date range])
@@ -127,6 +161,14 @@ Read `docs/pm/BACKLOG.md` and identify top executable (🟢) items.
 | Tests | [count] | [count] |
 | Deploys | [count] | [count] |
 ```
+
+---
+
+### Step 6b: Suggest Captain's Log
+
+After planning completes, suggest: "Bolt started — capture initial context? `/captainslog new [bolt-name]`"
+
+This auto-invoke suggestion closes the planning → knowledge capture loop.
 
 ---
 
@@ -177,6 +219,14 @@ Update `CURRENT-SPRINT.md` status to COMPLETE, then append to `docs/pm/SPRINT-LO
 
 ### Step 4: Update Backlog
 Move completed items to ✅ done in `docs/pm/BACKLOG.md`.
+
+### Step 5: Suggest Captain's Log Update
+
+After closing, suggest: "Bolt complete — update the captain's log with final context? `/captainslog update`"
+
+### Step 6: Compound Knowledge (if applicable)
+
+If this bolt solved non-trivial problems, suggest: "Document solutions for future reference? Check `docs/solutions/` for patterns."
 
 ---
 

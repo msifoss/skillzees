@@ -1,4 +1,4 @@
-# Initialize Project — Callhero Standard
+# Initialize Project — AI-DLC Standard
 
 Usage: `/init-project [project-name]`
 
@@ -8,7 +8,7 @@ Usage: `/init-project [project-name]`
 
 ## Purpose
 
-Scaffolds a new project repository following the battle-tested conventions established in the callhero codebase. This standard was developed through 16 development bolts, 155 security findings (all resolved), 3 five-persona code reviews, and production deployment — representing the collective wisdom of staff engineering, product ownership, CTO oversight, SRE operations, and security leadership.
+Scaffolds a new project repository following the AI-DLC framework conventions. This standard was battle-tested through 16 development bolts, 155 security findings (all resolved), 3 five-persona code reviews, and production deployment — representing the collective wisdom of staff engineering, product ownership, CTO oversight, SRE operations, and security leadership.
 
 The result is a project that is:
 - **Production-ready from day one** — CI, linting, testing, security controls
@@ -412,7 +412,7 @@ Generate based on language:
 
 #### 5a. PM Framework (`docs/pm/FRAMEWORK.md`)
 
-Use the Bolt sprint framework from callhero — adapted for the new project:
+Use the AI-DLC Bolt sprint framework — adapted for the new project:
 
 ```markdown
 # [Project Name] Sprint Framework — Bolts
@@ -608,7 +608,7 @@ Use the `/captainslog new project-setup` command to create the first captain's l
 git add -A
 git commit -m "Initial scaffold: [project-name] — [one-line description]
 
-Scaffolded with callhero standard:
+Scaffolded with AI-DLC standard:
 - CLAUDE.md, README.md, SECURITY.md, CHANGELOG.md
 - Bolt-based PM framework (docs/pm/)
 - CI pipeline, pre-commit hooks, Makefile
@@ -656,7 +656,7 @@ Project initialized: [project-name]
 
 ---
 
-## Design Principles (from callhero)
+## Design Principles
 
 These principles are baked into every scaffolded project:
 

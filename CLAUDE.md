@@ -20,30 +20,44 @@ skillzees/
 │   └── standards/
 ├── tests/                     # Validation tests
 │   └── validate.sh
-├── *.md                       # Slash command files (15 commands)
+├── *.md                       # Slash command files (30 commands)
 └── generate-readme.md         # Installs as readme.md (macOS collision avoidance)
 ```
 
-## Commands (15)
+## Commands (30)
 
 | Command | File | Category |
 |---------|------|----------|
-| `/init-project` | `init-project.md` | Project Lifecycle |
-| `/readme` | `generate-readme.md` | Project Lifecycle |
-| `/changelog` | `changelog.md` | Project Lifecycle |
-| `/docs` | `docs.md` | Project Lifecycle |
-| `/five-persona-review` | `five-persona-review.md` | Code Quality |
-| `/security-audit` | `security-audit.md` | Code Quality |
-| `/dlc-audit` | `dlc-audit.md` | Code Quality |
-| `/motherhen` | `motherhen.md` | Code Quality |
+| `/five-persona-review` | `five-persona-review.md` | Code Quality & Review |
+| `/security-audit` | `security-audit.md` | Code Quality & Review |
+| `/arch-audit` | `arch-audit.md` | Code Quality & Review |
+| `/staff-panel` | `staff-panel.md` | Code Quality & Review |
+| `/dlc-audit` | `dlc-audit.md` | Compliance & Audit |
+| `/motherhen` | `motherhen.md` | Compliance & Audit |
+| `/brainstorm` | `brainstorm.md` | Planning & Strategy |
+| `/deepen-plan` | `deepen-plan.md` | Planning & Strategy |
+| `/prd-go` | `prd-go.md` | Planning & Strategy |
+| `/exec-review` | `exec-review.md` | Planning & Strategy |
+| `/cost-estimate` | `cost-estimate.md` | Planning & Strategy |
 | `/pm` | `pm.md` | Project Management |
 | `/bolt-review` | `bolt-review.md` | Project Management |
 | `/captainslog` | `captainslog.md` | Project Management |
 | `/ticky` | `ticky.md` | Project Management |
-| `/budget` | `budget.md` | Planning & Cost |
-| `/cost-estimate` | `cost-estimate.md` | Planning & Cost |
+| `/am` | `am.md` | Project Management |
+| `/bolt-lfg` | `bolt-lfg.md` | Development Workflow |
+| `/slfg` | `slfg.md` | Development Workflow |
+| `/init-project` | `init-project.md` | Development Workflow |
+| `/setup` | `setup.md` | Development Workflow |
+| `/docs` | `docs.md` | Documentation |
+| `/readme` | `generate-readme.md` | Documentation |
+| `/changelog` | `changelog.md` | Documentation |
 | `/prodstatus` | `prodstatus.md` | Operations |
-| `/arch-audit` | `arch-audit.md` | Code Quality |
+| `/budget` | `budget.md` | Operations |
+| `/monthly-refresh` | `monthly-refresh.md` | Operations |
+| `/create-skill` | `create-skill.md` | Meta-Tools |
+| `/generate-command` | `generate-command.md` | Meta-Tools |
+| `/heal-skill` | `heal-skill.md` | Meta-Tools |
+| `/quickstart` | `quickstart.md` | Meta-Tools |
 
 ## Conventions
 
@@ -55,7 +69,7 @@ skillzees/
 
 ## Current State
 
-- **Version:** v1.0.0
-- **Commands:** 16
+- **Version:** v2.0.0
+- **Commands:** 30
 - **Origin:** Born from the [callhero](https://dev.azure.com/membersolutionsinc/DevOps/_git/callsync-hubspot) project
 - **License:** MIT

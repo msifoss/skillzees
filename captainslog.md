@@ -217,3 +217,37 @@ END OF LOG
 - Confirm to the user what was done
 - Show the filename created/updated
 - Offer to commit the log if desired
+
+---
+
+## Auto-Invoke Triggers
+
+Captain's Log should be automatically suggested (not silently invoked) when these events occur:
+
+### Bolt Lifecycle Events
+| Event | Trigger Phrase | Suggested Action |
+|-------|---------------|-----------------|
+| Bolt starts | `/pm plan` completes | Suggest: "Bolt started — create a captain's log? `/captainslog new [bolt-name]`" |
+| Bolt closes | `/pm close` completes | Suggest: "Bolt complete — update the captain's log? `/captainslog update`" |
+| Feature ships | "merged", "deployed", "shipped" | Suggest: "Nice ship! Capture the context? `/captainslog update`" |
+
+### Problem Resolution Events
+| Event | Trigger Phrase | Suggested Action |
+|-------|---------------|-----------------|
+| Fix confirmed | "that worked", "it's fixed", "working now", "problem solved" | Suggest: "Solution found — document it? `/captainslog update`" |
+| Session ending | "done for today", "signing off", "that's it for now" | Suggest: "End of session — capture context for next time? `/captainslog update`" |
+
+### Integration with /bolt-lfg
+The autonomous pipeline (`/bolt-lfg`) invokes `/captainslog new` at Step 5 automatically. The triggers above are for manual workflow — when the user isn't running the full pipeline.
+
+### Knowledge Retrieval Loop
+When creating a NEW captain's log, search for relevant past context:
+```bash
+# Check for recent logs on similar topics
+ls -1 docs/captains_log/caplog-*.txt 2>/dev/null | tail -5
+
+# Check for relevant solution documents
+ls docs/solutions/ 2>/dev/null
+```
+
+If relevant prior logs or solutions exist, reference them in the new log's "Previous Log" or "Context" section. This closes the capture → retrieval loop.

@@ -8,7 +8,7 @@ Usage: `/budget [action]`
 
 ## Purpose
 
-Creates and maintains a detailed infrastructure cost analysis following the callhero budget standard. This standard provides per-resource cost breakdowns, volume scaling projections, cost optimization tracking, and budget recommendations — the level of detail that lets you catch cost surprises before they hit your bill.
+Creates and maintains a detailed infrastructure cost analysis following the AI-DLC budget standard. This standard provides per-resource cost breakdowns, volume scaling projections, cost optimization tracking, and budget recommendations — the level of detail that lets you catch cost surprises before they hit your bill.
 
 ---
 

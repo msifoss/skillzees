@@ -70,7 +70,7 @@ Create Mermaid diagrams in `docs/architecture/`. These represent the system as i
 **Required diagrams:**
 
 #### a. C4 Context Diagram (`docs/architecture/c4-context.md`)
-System context: KRM and its external dependencies (Postgres, clients, etc.)
+System context: the application and its external dependencies (databases, clients, etc.)
 
 #### b. C4 Container Diagram (`docs/architecture/c4-container.md`)
 Internal containers: app server, database, background workers, etc.

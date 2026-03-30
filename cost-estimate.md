@@ -8,7 +8,7 @@ Usage: `/cost-estimate [scope]`
 
 ## Purpose
 
-Produces a development cost/effort estimate following the callhero standard established in `docs/budget/DEVELOPMENT-COST-ESTIMATE.md`. Breaks work down into T-shirt sizes, maps to hours, and provides a realistic timeline accounting for AI-pair productivity multipliers.
+Produces a development cost/effort estimate following the AI-DLC standard. Breaks work down into T-shirt sizes, maps to hours, and provides a realistic timeline accounting for AI-pair productivity multipliers.
 
 ---
 
@@ -85,14 +85,14 @@ Decompose into concrete tasks with T-shirt sizes:
 - One-time costs: [if any]
 ```
 
-### 4. Compare with Callhero Benchmarks
+### 4. Compare with Reference Benchmarks
 
-Reference callhero's actual delivery data:
-- Bolt 1-3 (core pipeline): ~3 days AI pair → 3 Lambda handlers, 21 tests, full IaC
-- Bolt 4-9 (features + ops): ~3 days AI pair → monitoring, canary, weekly report, multi-object, cost tracking
-- Bolt 10-13 (Phase 2): ~3 days AI pair → RDS, VPC, analytics, transcript search
-- Bolt 14-16 (hardening): ~2 days AI pair → CostMonitor, kill switch, security fixes, production readiness
+Reference the AI-DLC reference project delivery data as calibration:
+- Bolts 1-3 (core pipeline): ~3 days AI pair → core handlers, initial tests, full IaC
+- Bolts 4-9 (features + ops): ~3 days AI pair → monitoring, canary, reporting, cost tracking
+- Bolts 10-13 (Phase 2): ~3 days AI pair → database, networking, analytics, search
+- Bolts 14-16 (hardening): ~2 days AI pair → cost controls, kill switch, security fixes, production readiness
 
-Total: ~11 working days to build a production-grade serverless system with 101 tests, 155 security findings resolved, 7 Lambda functions, and comprehensive documentation.
+Total: ~11 working days to build a production-grade serverless system with 100+ tests, 155 security findings resolved, and comprehensive documentation.
 
 Use this as calibration for estimates.
