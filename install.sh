@@ -2,21 +2,22 @@
 # ============================================================================
 # Callhero Standard — Claude Code Global Skills Installer
 # ============================================================================
-# Installs global slash commands for Claude Code on a new machine.
+# Installs global slash commands and skills for Claude Code on a new machine.
 #
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/<your-repo>/main/install.sh | bash
 #   -- or --
 #   bash install.sh
 #   -- or --
-#   bash install.sh --from /path/to/source/commands
+#   bash install.sh --from /path/to/source
 #
 # What it does:
-#   1. Creates ~/.claude/commands/ if it doesn't exist
-#   2. Copies all .md command files into that directory
-#   3. Verifies installation
+#   1. Creates ~/.claude/commands/ and ~/.claude/skills/ if they don't exist
+#   2. Copies all .md command files into ~/.claude/commands/
+#   3. Copies all skills (SKILL.md) into ~/.claude/skills/<name>/
+#   4. Verifies installation
 #
-# Skills installed (30 commands):
+# Commands installed (33):
 #   /init-project         Full project scaffold (AI-DLC standard)
 #   /five-persona-review  Multi-perspective code review (12 expert personas)
 #   /security-audit       Structured security audit (OWASP + cloud + supply chain)
@@ -46,12 +47,24 @@
 #   /quickstart           Get started in 60 seconds
 #   /setup                Configure AI-DLC per-project settings
 #   /slfg                 Swarm mode autonomous pipeline
-#   /staff-panel          Staff engineer panel analysis
+#   /staff                Staff engineer panel analysis
+#   /compose              Pipeline composer
+#   /dlc-loop             Autonomous full-lifecycle DLC execution
+#   /route                Skill router
+#
+# Skills installed (34):
+#   ai-effort, am, chealth, conversion-plumber, design-panel, dlc-audit,
+#   docs, exec-review, fin-audit, init-brain, internal-link-builder,
+#   llm-team, marketing-team, moat-content-writer, motherhen, mytodo,
+#   pipe-lfg, pm, prd-go, prodstatus, qb, refine-page, seo-meta-agent,
+#   sitrep, staff, staff-rfc, ticky, truck-incentives, vehicle-finder,
+#   vertical-builder, webby, webgeni, webteam, weekly-update
 # ============================================================================
 
 set -euo pipefail
 
 COMMANDS_DIR="${HOME}/.claude/commands"
+SKILLS_DIR="${HOME}/.claude/skills"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE_DIR=""
 INSTALLED=0
@@ -166,7 +179,10 @@ COMMANDS=(
     "quickstart.md:quickstart.md"
     "setup.md:setup.md"
     "slfg.md:slfg.md"
-    "staff-panel.md:staff-panel.md"
+    "staff.md:staff.md"
+    "compose.md:compose.md"
+    "dlc-loop.md:dlc-loop.md"
+    "route.md:route.md"
 )
 
 # List mode
@@ -199,7 +215,19 @@ if [ "$UNINSTALL" = true ]; then
             echo -e "  ${RED}✗${NC} Removed /${name}"
         fi
     done
-    echo -e "\n${GREEN}Done.${NC} Commands removed. Claude Code will no longer show these slash commands."
+    echo ""
+    echo -e "${BOLD}Uninstalling skills...${NC}"
+    if [ -d "${SOURCE_DIR}/skills" ]; then
+        for skill_dir in "${SOURCE_DIR}"/skills/*/; do
+            [ -d "$skill_dir" ] || continue
+            skill_name="$(basename "$skill_dir")"
+            if [ -d "${SKILLS_DIR}/${skill_name}" ]; then
+                rm -rf "${SKILLS_DIR}/${skill_name}"
+                echo -e "  ${RED}✗${NC} Removed skill ${skill_name}"
+            fi
+        done
+    fi
+    echo -e "\n${GREEN}Done.${NC} Commands and skills removed."
     exit 0
 fi
 
@@ -210,10 +238,12 @@ fi
 echo -e "${BOLD}Callhero Standard — Claude Code Global Skills Installer${NC}"
 echo ""
 
-# Step 1: Ensure target directory exists
+# Step 1: Ensure target directories exist
 mkdir -p "$COMMANDS_DIR"
-echo -e "${BLUE}Target:${NC} ${COMMANDS_DIR}"
-echo -e "${BLUE}Source:${NC} ${SOURCE_DIR}"
+mkdir -p "$SKILLS_DIR"
+echo -e "${BLUE}Commands target:${NC} ${COMMANDS_DIR}"
+echo -e "${BLUE}Skills target:${NC}   ${SKILLS_DIR}"
+echo -e "${BLUE}Source:${NC}          ${SOURCE_DIR}"
 echo ""
 
 # Step 2: Copy command files
@@ -298,30 +328,102 @@ for src in "${SOURCE_DIR}"/*.md; do
     fi
 done
 
-# Step 4: Summary
+# Step 4: Install skills (skills/<name>/SKILL.md → ~/.claude/skills/<name>/SKILL.md)
+SKILLS_INSTALLED=0
+SKILLS_UPDATED=0
+SKILLS_SKIPPED=0
+
+if [ -d "${SOURCE_DIR}/skills" ]; then
+    echo ""
+    echo -e "${BOLD}Installing skills...${NC}"
+    for skill_dir in "${SOURCE_DIR}"/skills/*/; do
+        [ -d "$skill_dir" ] || continue
+        skill_name="$(basename "$skill_dir")"
+        src="${skill_dir}SKILL.md"
+        dst_dir="${SKILLS_DIR}/${skill_name}"
+        dst="${dst_dir}/SKILL.md"
+
+        if [ ! -f "$src" ]; then
+            echo -e "  ${YELLOW}⚠${NC}  ${skill_name} — no SKILL.md, skipping"
+            ((SKILLS_SKIPPED++))
+            continue
+        fi
+
+        mkdir -p "$dst_dir"
+
+        if [ -f "$dst" ]; then
+            if diff -q "$src" "$dst" > /dev/null 2>&1; then
+                echo -e "  ${GREEN}✓${NC}  ${skill_name} — already up to date"
+                ((SKILLS_SKIPPED++))
+                continue
+            fi
+
+            if [ "$FORCE" = true ]; then
+                cp "$src" "$dst"
+                echo -e "  ${YELLOW}↻${NC}  ${skill_name} — updated"
+                ((SKILLS_UPDATED++))
+            else
+                echo -en "  ${YELLOW}?${NC}  ${skill_name} — exists and differs. Overwrite? [y/N] "
+                read -r response
+                if [[ "$response" =~ ^[Yy]$ ]]; then
+                    cp "$src" "$dst"
+                    echo -e "      ${YELLOW}↻${NC}  Updated"
+                    ((SKILLS_UPDATED++))
+                else
+                    echo -e "      Skipped"
+                    ((SKILLS_SKIPPED++))
+                fi
+            fi
+        else
+            cp "$src" "$dst"
+            echo -e "  ${GREEN}+${NC}  ${skill_name} — installed"
+            ((SKILLS_INSTALLED++))
+        fi
+    done
+fi
+
+# Step 5: Summary
 echo ""
 echo -e "${BOLD}Summary:${NC}"
-echo -e "  Installed: ${GREEN}${INSTALLED}${NC}"
-echo -e "  Updated:   ${YELLOW}${UPDATED}${NC}"
-echo -e "  Skipped:   ${SKIPPED}"
+echo -e "  ${BOLD}Commands:${NC}"
+echo -e "    Installed: ${GREEN}${INSTALLED}${NC}"
+echo -e "    Updated:   ${YELLOW}${UPDATED}${NC}"
+echo -e "    Skipped:   ${SKIPPED}"
+echo -e "  ${BOLD}Skills:${NC}"
+echo -e "    Installed: ${GREEN}${SKILLS_INSTALLED}${NC}"
+echo -e "    Updated:   ${YELLOW}${SKILLS_UPDATED}${NC}"
+echo -e "    Skipped:   ${SKILLS_SKIPPED}"
 echo ""
 
-# Step 5: Verify
+# Step 6: Verify
 echo -e "${BOLD}Verification:${NC}"
-TOTAL=0
+CMD_TOTAL=0
 for entry in "${COMMANDS[@]}"; do
     dst_file="${entry##*:}"
     if [ -f "${COMMANDS_DIR}/${dst_file}" ]; then
-        ((TOTAL++))
+        ((CMD_TOTAL++))
     fi
 done
-echo -e "  ${TOTAL}/${#COMMANDS[@]} commands installed in ${COMMANDS_DIR}"
+SKILL_TOTAL=0
+SKILL_EXPECTED=0
+if [ -d "${SOURCE_DIR}/skills" ]; then
+    for skill_dir in "${SOURCE_DIR}"/skills/*/; do
+        [ -d "$skill_dir" ] || continue
+        ((SKILL_EXPECTED++))
+        skill_name="$(basename "$skill_dir")"
+        if [ -f "${SKILLS_DIR}/${skill_name}/SKILL.md" ]; then
+            ((SKILL_TOTAL++))
+        fi
+    done
+fi
+echo -e "  ${CMD_TOTAL}/${#COMMANDS[@]} commands installed in ${COMMANDS_DIR}"
+echo -e "  ${SKILL_TOTAL}/${SKILL_EXPECTED} skills installed in ${SKILLS_DIR}"
 echo ""
 
-if [ "$TOTAL" -eq "${#COMMANDS[@]}" ]; then
-    echo -e "${GREEN}${BOLD}All commands installed successfully.${NC}"
+if [ "$CMD_TOTAL" -eq "${#COMMANDS[@]}" ] && [ "$SKILL_TOTAL" -eq "$SKILL_EXPECTED" ]; then
+    echo -e "${GREEN}${BOLD}All commands and skills installed successfully.${NC}"
     echo ""
-    echo "These slash commands are now available in Claude Code:"
+    echo "Slash commands now available in Claude Code:"
     echo ""
     for entry in "${COMMANDS[@]}"; do
         dst_file="${entry##*:}"
@@ -330,5 +432,5 @@ if [ "$TOTAL" -eq "${#COMMANDS[@]}" ]; then
     echo ""
     echo "Try: claude and then type /init-project my-new-app"
 else
-    echo -e "${YELLOW}Some commands were not installed. Run with --list to check status.${NC}"
+    echo -e "${YELLOW}Some items were not installed. Run with --list to check status.${NC}"
 fi

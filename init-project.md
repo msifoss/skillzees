@@ -654,6 +654,41 @@ Project initialized: [project-name]
   5. Run /captainslog new project-setup to document decisions
 ```
 
+### 13. Initialize Knowledge Brain
+
+After project scaffold is complete, run the brain initialization using the same logic as `/init-brain`:
+
+1. **Create `.claude/memory/MEMORY.md`** — pre-populate from info gathered during init:
+   - People from Step 1 answers
+   - Auto-detected critical files (CLAUDE.md, config files, Makefile)
+   - Link to STATE.md and PM docs
+   - Empty dashboards and decisions sections
+
+2. **Create `docs/STATE.md`** — pre-populate from init answers:
+   - Project description as scoreboard
+   - Version: 0.1.0 (initial scaffold)
+   - Team from Step 1
+   - Risks: "None yet — project just initialized"
+   - Gates: "First deployment" as initial milestone
+
+3. **Create `docs/strats/`** — empty directory for strategy documents
+
+4. **Ask about leadership question log:**
+   > "Is there a key decision-maker who needs a question log? (name, or 'skip')"
+   - If yes: create `docs/strats/questions4{name}.md` with header and empty table
+   - If skip: just create the directory
+
+5. **Create remaining brain structure:**
+   - `docs/key_findings/INDEX.md` — empty index with Current/Superseded sections
+   - `docs/key_insights/.gitkeep`
+   - `docs/meetings/.gitkeep`
+   - `notes.txt` — scratch pad
+
+6. **Update the initial commit** (Step 11) to include brain files in the commit message:
+   ```
+   - Knowledge brain (.claude/memory/, STATE.md, strats/, key_findings/, meetings/)
+   ```
+
 ---
 
 ## Design Principles

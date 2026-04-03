@@ -1,6 +1,6 @@
 # Staff Engineer Panel Analysis
 
-Usage: `/staff-panel <problem>`
+Usage: `/staff <problem>`
 
 **Arguments:** $ARGUMENTS
 
@@ -14,7 +14,7 @@ Convene a panel of 4 staff engineers from top tech companies (Tim/SpaceX, Rob/Ro
 
 ## Instructions for Claude
 
-Read the full skill definition from `/Users/msichris/.claude/skills/staff-panel/SKILL.md` and follow it exactly.
+Read the full skill definition from `/Users/msichris/.claude/skills/staff/SKILL.md` and follow it exactly.
 
 The problem to analyze is: $ARGUMENTS
 
