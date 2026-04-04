@@ -17,8 +17,13 @@ Full autonomous engineering pipeline that chains the AI-DLC bolt workflow end-to
 ## Pipeline
 
 ```
-brainstorm → plan → work → review → captainslog → close
+brainstorm → plan (+librarian) → work → review (+sentinel) → captainslog → close (+evolver)
 ```
+
+**Automatic hooks** (wired in, no manual invocation needed):
+- **Librarian** runs in Step 2 — searches captain's logs and key findings for relevant prior decisions
+- **Sentinel** runs in Step 4 — auto-triages security findings from review into SECURITY.md
+- **Evolver** runs in Step 6 — checks CLAUDE.md for staleness and proposes updates
 
 CRITICAL: Execute every step below IN ORDER. Do NOT skip any step. Do NOT jump ahead to coding. The brainstorm and planning phases MUST complete before work begins.
 
@@ -64,7 +69,27 @@ During planning:
 - Pull items from the backlog or create new ones based on $ARGUMENTS
 - Define the bolt goal, items, and success criteria
 
-GATE: STOP. Verify that `docs/pm/CURRENT-SPRINT.md` has been updated with a new bolt. If not, planning did not complete — run `/pm plan` again. Do NOT proceed to Step 2b without an active bolt.
+GATE: STOP. Verify that `docs/pm/CURRENT-SPRINT.md` has been updated with a new bolt. If not, planning did not complete — run `/pm plan` again. Do NOT proceed to Step 2a without an active bolt.
+
+---
+
+## Step 2a: Librarian — Knowledge Recall (automatic)
+
+Before deepening the plan, automatically search project knowledge for relevant prior decisions:
+
+```
+/librarian find [bolt goal keywords]
+```
+
+Search `docs/captains_log/`, `docs/key_findings/`, `docs/solutions/`, and `docs/reviews/` for anything related to this bolt's scope. If relevant prior decisions or lessons are found:
+
+1. Summarize them in 3-5 bullets
+2. Flag any that contradict or inform the current plan
+3. Note if a similar problem was already solved (avoid re-solving)
+
+If no relevant knowledge found, report "No prior decisions found for this scope" and continue.
+
+**This step prevents re-solving solved problems and surfaces lessons from prior bolts.**
 
 ---
 
@@ -147,7 +172,23 @@ The review will:
 
 GATE: STOP. Verify that a review document was created in `docs/reviews/`. If Critical findings exist, fix them before proceeding. High findings should be fixed or explicitly deferred with rationale.
 
-### 4b. Fix Findings
+### 4b. Sentinel — Security Triage (automatic)
+
+If the review produced any security-related findings (auth, injection, secrets, permissions, crypto):
+
+```
+/sentinel triage
+```
+
+Sentinel will:
+1. Extract security findings from the review document
+2. Classify by severity and assign SEC-NNN IDs
+3. Update SECURITY.md with new findings (add to Known Limitations or Resolved as appropriate)
+4. Update `.ai-dlc.state.yaml` pillar counts if the state file exists
+
+If no security findings in the review, skip silently.
+
+### 4c. Fix Findings
 
 If the review found Critical or High issues:
 1. Fix all Critical findings immediately
@@ -175,6 +216,26 @@ GATE: STOP. Verify that a captain's log was created in `docs/captains_log/`. If 
 
 ## Step 6: Close the Bolt
 
+### 6a. Evolver — Context Freshness Check (automatic)
+
+Before closing, check if CLAUDE.md needs updating based on what this bolt changed:
+
+```
+/evolver stale
+```
+
+Evolver will:
+1. Compare CLAUDE.md claims (version, test count, module list, migration count) against actuals
+2. Check if the bolt added new modules, endpoints, migrations, or changed architecture
+3. Propose specific CLAUDE.md updates if drift is detected
+4. Apply updates (or list them for confirmation)
+
+If CLAUDE.md is current, report "CLAUDE.md is fresh — no updates needed" and continue.
+
+**This step caught drift 3 times in 48 bolts (Bolts 43, 44, 46). Automating it here prevents accumulation.**
+
+### 6b. Close Sprint
+
 ```
 /pm close
 ```
@@ -185,7 +246,7 @@ This will:
 - Move completed backlog items to done
 - Update `CURRENT-SPRINT.md` status to COMPLETE
 
-### 6b. Push and PR (if on a feature branch)
+### 6c. Push and PR (if on a feature branch)
 
 ```bash
 # Push the branch
@@ -259,11 +320,14 @@ tags: [relevant-tags]
 |------|---------|------|-------------|
 | 1 | `/brainstorm` (conditional) | Brainstorm doc exists OR skip justified | `docs/brainstorms/*.md` |
 | 2 | `/pm plan` | Active bolt in CURRENT-SPRINT.md | `docs/pm/CURRENT-SPRINT.md` |
+| 2a | `/librarian find` (automatic) | Prior decisions surfaced | Knowledge recall summary |
 | 2b | `/deepen-plan` | Research summary + amendments applied | Research-hardened plan |
 | 3 | (implementation) | Code changes + tests pass | Modified source files |
 | 4 | `/five-persona-review` | Review doc + critical findings fixed | `docs/reviews/*.txt` |
+| 4b | `/sentinel triage` (automatic) | Security findings triaged | `SECURITY.md` updated |
 | 5 | `/captainslog new` | Captain's log created | `docs/captains_log/*.txt` |
-| 6 | `/pm close` + PR | Bolt archived, PR created | `docs/pm/SPRINT-LOG.md` |
+| 6a | `/evolver stale` (automatic) | CLAUDE.md freshness verified | `CLAUDE.md` updated if needed |
+| 6b | `/pm close` + PR | Bolt archived, PR created | `docs/pm/SPRINT-LOG.md` |
 | 7 | (compound, optional) | Solution doc if non-trivial | `docs/solutions/*.md` |
 
 Start with Step 1 now. Remember: brainstorm/plan FIRST, then work. Never skip the gates.
