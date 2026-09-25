@@ -10,7 +10,7 @@ argument-hint: <domain> [--hubspot-id <id>] [--depth quick|standard|exhaustive]
 
 > **⚠️ FROZEN as of 2026-07-24.** This is the local **Claude Code** version of the skill. It requires Bash, Python 3.11+, and WeasyPrint installed on the local machine. The **preferred version for all Member Solutions users is now the Claude Desktop skill** — see [`SKILL-desktop.md`](SKILL-desktop.md) and [`docs/DESKTOP-SETUP.md`](docs/DESKTOP-SETUP.md).
 >
-> This local version stays available as a fallback if the MCP server at `https://triplecrown.membies.com` is unreachable. Bug fixes will be back-ported here; no new features. Full retirement scheduled for 2026-09-22 (60 days after freeze), assuming clean Desktop operation.
+> This local version stays available as a fallback if the MCP server at `https://triplecrown.membies.com` is unreachable. Bug fixes will be back-ported here; no new features. Retirement postponed — see notes as of 2026-09-24: Desktop endpoint not responsive when checked (https://triplecrown.membies.com/ returned HTTP 404). Original retirement date was 2026-09-22; will re-verify before any future deletion.
 
 Repeatable investigation pattern for evaluating whether a merchant applying to Member Solutions is legitimate, fraudulent, or elevated-risk. Born from three foundational investigations run in July 2026:
 

@@ -1,3 +1,8 @@
+---
+name: partner-pull
+description: Partner deep-dive data pull — pulls every HubSpot artifact tied to a 97 Display referral partner (contact, company, engagements, property history) into five analyst-grade markdown deliverables
+---
+
 # /partner-pull — Partner Deep-Dive Data Pull
 
 Pulls every HubSpot artifact tied to a 97 Display referral partner — contact + company + all engagement object types + property history — and produces five analyst-grade markdown deliverables under `docs/partner_program/clients/<slug>/`.

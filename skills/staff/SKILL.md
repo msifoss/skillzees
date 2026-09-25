@@ -1,3 +1,10 @@
+---
+name: staff
+description: Staff Engineer Panel — convenes 4 staff engineers from top tech companies + Will Larson (moderator) to independently analyze technical problems, debate options, and produce a consensus decision with implementation plan
+allowed-tools: Bash, Read, Write, Edit, Glob, Grep, Agent, EnterWorktree, ExitWorktree
+argument-hint: "<technical problem or file path>"
+---
+
 # /staff — Staff Engineer Panel Analysis
 
 Convene a panel of 4 staff engineers from top tech companies + Will Larson as moderator to independently analyze a technical problem, debate options, and produce a consensus decision with implementation plan.

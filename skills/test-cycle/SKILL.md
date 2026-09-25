@@ -1,3 +1,8 @@
+---
+name: test-cycle
+description: Dev → Test → Report → Backlog loop — automated quality cycle that tests the platform, logs results, updates the backlog, and feeds findings back into the next dev cycle
+---
+
 # /test-cycle — Dev → Test → Report → Backlog Loop
 
 Automated quality cycle that runs after code changes. Tests the platform, logs results, updates the backlog, and feeds findings back into the next dev cycle.

@@ -2,7 +2,7 @@
 name: vehicle-finder
 description: Search dealerships in any area for vehicles matching specific criteria (type, price, features, KMs). Scrapes dealer sites and aggregators in parallel, deduplicates, scores deals, and outputs structured JSON/MD.
 user-invocable: true
-allowed-tools: Bash, Read, Write, Edit, Glob, Grep, Agent, WebFetch, WebSearch, AskUserQuestion, TaskCreate, TaskUpdate, TaskList
+allowed-tools: Bash, Read, Write, Edit, Glob, Grep, Agent, WebFetch, WebSearch, AskUserQuestion
 argument-hint: [location] [vehicle-type] [options] — e.g., /vehicle-finder Saskatoon trucks --max-price 25000 --features "heated seats" --max-km 200000
 ---
 

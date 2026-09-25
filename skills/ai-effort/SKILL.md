@@ -6,6 +6,8 @@ allowed-tools: Bash, Read, Write, Edit, Glob, Grep, Agent, WebFetch
 argument-hint: "[YYYY-MM-DD YYYY-MM-DD] [--summary] [--query \"question\"]"
 ---
 
+> **NOTE (2026-09-24):** This skill calls the `mcp__weeklyops__*` tools. If the weeklyops MCP server is not registered in your Claude Code environment, these calls will fail. Register the server or replace with equivalent local file reads before invoking.
+
 # /ai-effort — AI Effort & Time Savings Tracker
 
 Scan all GitHub repos under a user account for commits in a date range. For each file touched, classify the work, estimate complexity, and calculate how much time AI saved compared to manual development. Results are stored in a cumulative JSON ledger and can be queried over time.

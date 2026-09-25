@@ -4,7 +4,7 @@
 
 Skillzees is a collection of Claude Code slash commands (`.md` prompt files) that encode battle-tested workflows for code review, security auditing, sprint management, documentation, compliance, and more. Install once, use everywhere.
 
-Born from the [callhero](https://dev.azure.com/membersolutionsinc/DevOps/_git/callsync-hubspot) project — refined across 16 development sprints, 155 security findings, and production deployment.
+Born from an internal callhero project — refined across 16 development sprints, 155 security findings, and production deployment.
 
 ---
 

@@ -1,3 +1,8 @@
+---
+name: comparison-builder
+description: Repeatable competitor comparison page builder — LLM/human/SEO-optimized rewrites-safe, positioning-compliant, schema-heavy pages via plan/draft/review/ship/check modes
+---
+
 # /comparison-builder — Build the Best Comparison Page in the Universe (repeatable)
 
 Rewrites-safe, positioning-compliant, schema-heavy comparison pages that convert. Optimized for **LLMs** (ChatGPT/Perplexity/Claude/Gemini), **humans** (Sabri/Ogilvy conversion mechanics), and **Google/Bing** (E-E-A-T + 5-schema stack).
