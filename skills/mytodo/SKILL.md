@@ -1,3 +1,8 @@
+---
+name: mytodo
+description: Accurate per-person todo view — clean, filtered view of open work items for any team member, sourced from two authoritative files (no scanning, no guessing)
+---
+
 # /mytodo — Accurate Per-Person Todo View
 
 Shows a clean, filtered view of all open work items for any team member. Reads from exactly two authoritative sources — no scanning, no guessing.

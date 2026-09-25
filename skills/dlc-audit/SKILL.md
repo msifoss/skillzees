@@ -2,7 +2,7 @@
 name: dlc-audit
 description: AI-DLC compliance audit — deep process adherence assessment with foundation bootstrapping, 0-10 numeric scoring, and maturity rating
 user-invocable: true
-allowed-tools: Bash, Read, Write, Edit, Glob, Grep, Task
+allowed-tools: Bash, Read, Write, Edit, Glob, Grep, Agent
 argument-hint: [assess | quick | init | full | compliance]
 ---
 

@@ -20,7 +20,7 @@ skillzees/
 │   └── standards/
 ├── tests/                     # Validation tests
 │   └── validate.sh
-├── skills/                    # Skill definitions (34 skills)
+├── skills/                    # Skill definitions (89 skills)
 │   ├── ai-effort/SKILL.md
 │   ├── am/SKILL.md
 │   ├── ...                    # Each skill has its own directory with SKILL.md
@@ -67,9 +67,11 @@ skillzees/
 | `/heal-skill` | `heal-skill.md` | Meta-Tools |
 | `/quickstart` | `quickstart.md` | Meta-Tools |
 
-## Skills (94)
+## Skills (89)
 
 Skills are full prompt definitions in `skills/<name>/SKILL.md`. Some commands are thin stubs that load their corresponding skill.
+
+> **Note:** Some CallHero-specific skills (`callhero-health`, `ingest`) live in the private companion repo [`msifoss/skillzees-private`](https://github.com/msifoss/skillzees-private) because they reference internal AWS infrastructure. Install both repos side by side if you need them.
 
 | Skill | Description |
 |-------|-------------|
@@ -81,7 +83,6 @@ Skills are full prompt definitions in `skills/<name>/SKILL.md`. Some commands ar
 | `bootstrapper` | Foundation agent — extends /init-project with state file creation and auto-handoff to /pm plan |
 | `catchmeup` | First-load orientation for a leader — brings someone new up to speed on the project |
 | `changeloggy` | Date-bucketed git activity analysis across one or more repos with exec-level Q&A |
-| `chealth` | CallHero comprehensive health check |
 | `comparison-builder` | Repeatable competitor-comparison page builder (LLM/human/SEO optimized) |
 | `competitor` | Scaffold a new competitor analysis from a template |
 | `conversion-plumber` | CTA link audit and conversion path consolidation |
@@ -93,8 +94,7 @@ Skills are full prompt definitions in `skills/<name>/SKILL.md`. Some commands ar
 | `dealer-rate-hike` | Detect and explain wholesale rate changes (MSI-to-dealer take rates) for any APS dealer |
 | `deployer` | Deployment agent — generic deploy pipeline runner with multi-env verification and runbook generation |
 | `design-panel` | Web design review panel (4 designers + Steve Schoger moderator) |
-| `discuss-cgii` | cgii-project variant of /discuss — voice-friendly contributor communications |
-| `discuss-jenmatrix` | jenmatrix-project variant of /discuss — voice-friendly contributor communications |
+| `discuss` | Voice-friendly contributor discussions logged to docs/discussions/<contributor>/. Reads project + contributor roster from config.yaml. |
 | `dlc-audit` | AI-DLC compliance audit with numeric scoring |
 | `dns-forensics` | Reconstruct what changed in a domain's DNS when a customer reports their site is down |
 | `docs` | Documentation generation (AI-DLC standard) |
@@ -110,7 +110,6 @@ Skills are full prompt definitions in `skills/<name>/SKILL.md`. Some commands ar
 | `growth` | EFIT club price-increase impact analysis — revenue trends, fee uptake, payment distribution |
 | `handoff` | Inter-skill connector — passes artifacts between skills and bridges format mismatches |
 | `hardener` | Ops readiness agent — runs 47-item checklist, scores, and groups hardening bolts |
-| `ingest` | CallHero data pipeline — diagnose gaps, backfill, prove parity |
 | `init-brain` | Retrofit knowledge management brain into any repo |
 | `internal-link-builder` | Internal links and CTAs for top blog posts |
 | `interview` | Scaffold a new customer interview file from the template |
@@ -130,7 +129,6 @@ Skills are full prompt definitions in `skills/<name>/SKILL.md`. Some commands ar
 | `planroom` | Strategic planning collaboration guide for non-technical leaders (git without git) |
 | `pm` | Project management update |
 | `prd-go` | Production-ready PRD writer |
-| `prodstatus` | Production health dashboard |
 | `qb` | Question log for leadership |
 | `ql` | Log questions for leadership (generic variant of qb/qx) |
 | `qualitygate` | Quality pillar agent — coverage thresholds, pre-commit compliance, Ascent verification |
@@ -149,7 +147,6 @@ Skills are full prompt definitions in `skills/<name>/SKILL.md`. Some commands ar
 | `snapshot` | Save a verbatim snapshot of the current session's transcript as a checkpoint |
 | `speccer` | Specification writer — converts requirements to user stories and technical specs |
 | `staff` | Staff engineer panel analysis |
-| `staff-panel` | Staff engineer panel (EZFacility growth-plan variant with platform decisions focus) |
 | `staff-rfc` | Staff engineer RFC proposals |
 | `switch-site` | Switch local Anny to query a different registered site |
 | `tasko` | Prioritized snapshot of one HubSpot owner's open work with follow-up modes |
@@ -178,9 +175,9 @@ Skills are full prompt definitions in `skills/<name>/SKILL.md`. Some commands ar
 
 ## Current State
 
-- **Version:** v3.0.0 (+ unreleased: 57 new skills synced from global + repo-local sources on 2026-07-25)
+- **Version:** v3.0.0 (+ unreleased: catalog cleanup 2026-09-24 — panel-driven consolidation, removed staff-panel/discuss-cgii/discuss-jenmatrix/qb-body/ql-body duplication, extracted CallHero-specific skills to private companion repo)
 - **Commands:** 33
-- **Skills:** 94
-- **Last verified:** 2026-07-25 via feat/sync-external-skills sweep
-- **Origin:** Born from the [callhero](https://dev.azure.com/membersolutionsinc/DevOps/_git/callsync-hubspot) project
+- **Skills:** 89 (+ 2 in [skillzees-private](https://github.com/msifoss/skillzees-private))
+- **Last verified:** 2026-09-24 via chore/skills-catalog-cleanup
+- **Origin:** Born from an internal callhero project
 - **License:** MIT

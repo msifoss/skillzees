@@ -1,3 +1,10 @@
+---
+name: feature-get
+description: Pull platform enhancement ideas — fetches feature requests submitted by weeklyops-prompt users, groups by theme, and presents to developers for triage
+---
+
+> **NOTE (2026-09-24):** This skill calls the `mcp__weeklyops__*` tools. If the weeklyops MCP server is not registered in your Claude Code environment, these calls will fail. Register the server or replace with equivalent local file reads before invoking.
+
 # /feature-get — Pull Platform Enhancement Ideas
 
 Fetch feature requests submitted by weeklyops-prompt users, group by theme, and present to developers for triage. Runs in the weeklyops repo.

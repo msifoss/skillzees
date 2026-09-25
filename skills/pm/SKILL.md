@@ -1,3 +1,8 @@
+---
+name: pm
+description: Project management update — reads current state, identifies what's changed, and updates all PM docs (sprint, backlog, sprint log) to stay current
+---
+
 # /pm — Project Management Update
 
 Run a PM review of the current project. Read current state, identify what's changed, and update all PM docs to stay current.

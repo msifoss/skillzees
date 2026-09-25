@@ -10,7 +10,7 @@ argument-hint: "check | connect | map | gaps"
 
 The connective tissue between skills. Ensures that when one skill produces output, the next skill in the pipeline can discover and consume it without manual bridging.
 
-> "You have 34 skills but your pipeline has seams. ai-lfg should be the connective tissue." — Rob, Roblox
+> "You have 94 skills but your pipeline has seams. ai-lfg should be the connective tissue." — Rob, Roblox
 
 ## Trigger
 

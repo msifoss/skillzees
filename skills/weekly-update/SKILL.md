@@ -1,3 +1,10 @@
+---
+name: weekly-update
+description: OKR-disciplined weekly self-review — synthesizes email scan, calendar summary, supporting docs, and live OKR data into a structured review surfacing what moved, stalled, and what to commit to next
+---
+
+> **NOTE (2026-09-24):** This skill calls the `mcp__weeklyops__*` tools. If the weeklyops MCP server is not registered in your Claude Code environment, these calls will fail. Register the server or replace with equivalent local file reads before invoking.
+
 # /weekly-update — OKR-Disciplined Weekly Self-Review
 
 Synthesize a person's weekly inputs (email scan, calendar summary, supporting docs) with live OKR data into a structured self-review that surfaces what moved, what stalled, and what to commit to next.
