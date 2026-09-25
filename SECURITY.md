@@ -24,4 +24,5 @@ If you discover a security issue:
 
 | Version | Supported |
 |---------|-----------|
-| 1.0.0 | Yes |
+| 3.0.0 | Yes |
+| < 3.0.0 | No |
