@@ -1,6 +1,6 @@
 # Skillzees
 
-**30 global slash commands for Claude Code — staff-level engineering practices, portable to every project.**
+**33 global slash commands for Claude Code — staff-level engineering practices, portable to every project.**
 
 Skillzees is a collection of Claude Code slash commands (`.md` prompt files) that encode battle-tested workflows for code review, security auditing, sprint management, documentation, compliance, and more. Install once, use everywhere.
 
@@ -19,11 +19,11 @@ bash /tmp/skillzees/install.sh --from /tmp/skillzees
 bash /path/to/skillzees/install.sh --force
 ```
 
-All 30 commands are immediately available as `/command-name` in any Claude Code session. Run `/quickstart` to see the essentials.
+All 33 commands are immediately available as `/command-name` in any Claude Code session. Run `/quickstart` to see the essentials.
 
 ---
 
-## Commands (30)
+## Commands (33)
 
 ### Code Quality & Review
 
@@ -64,6 +64,9 @@ All 30 commands are immediately available as `/command-name` in any Claude Code 
 | **`/slfg`** | Swarm mode autonomous pipeline — parallel execution variant that runs independent items simultaneously |
 | **`/init-project`** | Scaffold a new project with CI, tests, docs, PM framework, security policy, and budget tracking (AI-DLC standard) |
 | **`/setup`** | Configure AI-DLC per-project settings with auto-detected stack defaults |
+| **`/compose`** | Pipeline composer — chain multiple commands into a coordinated workflow |
+| **`/dlc-loop`** | Autonomous full-lifecycle DLC execution loop |
+| **`/route`** | Skill router — picks the right skill or command for a given request |
 
 ### Documentation
 

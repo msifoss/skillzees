@@ -52,13 +52,23 @@
 #   /dlc-loop             Autonomous full-lifecycle DLC execution
 #   /route                Skill router
 #
-# Skills installed (34):
-#   ai-effort, am, chealth, conversion-plumber, design-panel, dlc-audit,
-#   docs, exec-review, fin-audit, init-brain, internal-link-builder,
-#   llm-team, marketing-team, moat-content-writer, motherhen, mytodo,
-#   pipe-lfg, pm, prd-go, prodstatus, qb, refine-page, seo-meta-agent,
-#   sitrep, staff, staff-rfc, ticky, truck-incentives, vehicle-finder,
-#   vertical-builder, webby, webgeni, webteam, weekly-update
+# Skills installed (94):
+#   a2p-audit, add-site, ai-effort, am, bizdig, bootstrapper, catchmeup,
+#   changeloggy, chealth, comparison-builder, competitor, conversion-plumber,
+#   costkeeper, customer-clone, customer-migrate, data-pump,
+#   dealer-monthend-report, dealer-rate-hike, deployer, design-panel,
+#   discuss-cgii, discuss-jenmatrix, dlc-audit, dns-forensics, docs,
+#   engagement-report, evolver, exec-jam, exec-review, feature-get, fin-audit,
+#   foreman, gatekeeper, gitsmith, growth, handoff, hardener, ingest,
+#   init-brain, internal-link-builder, interview, lfg, librarian, list-sites,
+#   llm-team, marketing-team, moat-content-writer, motherhen, mytodo, newpath,
+#   partner-pull, pci-sync, perf-check, pipe-lfg, planroom, pm, prd-go,
+#   prodstatus, qb, ql, qualitygate, qx, radar, refine-clone, refine-page,
+#   remove-site, repo-activity, reqs, scribe, sentinel, seo-meta-agent,
+#   seo-rank, sitrep, snapshot, speccer, staff, staff-panel, staff-rfc,
+#   switch-site, tasko, test-cycle, ticky, toolkit-sync, tracer, triplecrown,
+#   truck-incentives, vehicle-finder, vertical-builder, webby, webgeni,
+#   webteam, weekly-update, weeklyreport, wrapit
 # ============================================================================
 
 set -euo pipefail
