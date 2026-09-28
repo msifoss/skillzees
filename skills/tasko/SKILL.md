@@ -2,7 +2,7 @@
 name: tasko
 description: Prioritized snapshot of one HubSpot owner's open work — every open task and every open ticket assigned to them, sorted overdue→due-soon→HIGH→rest, with per-item status lines, a state-derived sentiment, and clickable URLs. Follow-up modes (on request): "Critical Few" (3–5 must-do items with reasoning) and "Teams Post" (colored-ball 🔴🟡 bullets for chat). Delta mode (--delta flag): before→after comparison against the most recent stored snapshot, showing what got closed, moved, or newly landed since. Every run auto-writes a snapshot for next time. Use when the user asks "what's on <name>'s plate", "/tasko chris", "critical few for today", "Teams post", "what changed since this morning", "before/after", or wants to see someone's HubSpot workload.
 user-invocable: true
-allowed-tools: Bash, Read, Write, AskUserQuestion, ToolSearch, mcp__hubmcp__hubmcp_portals_list, mcp__hubmcp__hubmcp_query, mcp__hubmcp__hubmcp_get, mcp__claude_ai_HubSpot__search_owners, mcp__claude_ai_HubSpot__get_user_details
+allowed-tools: Bash, Read, Write, AskUserQuestion, ToolSearch, mcp__hubmcp__hubmcp_portals_list, mcp__hubmcp__hubmcp_query, mcp__hubmcp__hubmcp_get, mcp__hubmcp__hubmcp_owners, mcp__claude_ai_HubSpot__search_owners, mcp__claude_ai_HubSpot__get_user_details
 argument-hint: <name-or-email> [portal-id-or-slug] [--delta]
 ---
 
@@ -48,9 +48,13 @@ If the argument is ambiguous or matches nothing, print the list of registered po
 
 ## Step 1 — Resolve person to owner_id
 
-The person argument names a HubSpot **owner** (a user in the portal), not a contact. Use `mcp__claude_ai_HubSpot__search_owners` — it's the fastest path.
+The person argument names a HubSpot **owner** (a user in the portal), not a contact. Resolve it through **hubmcp** — all HubSpot access goes through hubmcp, never the native HubSpot connector.
 
-1. Call `search_owners` with the argument as the query. Pass the portal id/slug through if the tool accepts it; otherwise search the currently-attached portal and note that in the output.
+1. Call `mcp__hubmcp__hubmcp_owners` with `portals: [<slug>]`.
+   - Argument looks like an email → pass it as `email` (exact server-side match).
+   - Otherwise → call without `email` and match the argument case-insensitively against `first_name`, `last_name`, `first_name + " " + last_name`, and the email local-part.
+   - Rows carry `id` (the owner_id), `user_id`, `email`, `first_name`, `last_name`, `archived`, `teams`.
+   - **Fallback, only if `hubmcp_owners` is not registered** (hubmcp older than msifoss/hubmcp#17): use `mcp__claude_ai_HubSpot__search_owners` against the attached portal, and say in the output that the native connector was used.
 2. If exactly one owner matches → capture `owner_id`, `email`, `firstName lastName`.
 3. If multiple owners match → print a short numbered list (name · email · id), ask the user to pick, then continue.
 4. If zero owners match → try a broader search (last name only, or email local-part) before giving up. If still nothing, print "No HubSpot owner matched `<arg>` in portal `<slug>`" and stop.
@@ -395,7 +399,7 @@ After a delta, the user often asks "so what's left to do today?" — that's a St
 
 ## Notes / gotchas
 
-- **Owners vs users vs contacts.** A HubSpot "owner" is a user who can be assigned records. Tasks/tickets have `hubspot_owner_id`, which is the owner id, NOT the user id and NOT the contact id. `search_owners` returns owner records with both `id` (owner_id) and `userId` — use `id`.
+- **Owners vs users vs contacts.** A HubSpot "owner" is a user who can be assigned records. Tasks/tickets have `hubspot_owner_id`, which is the owner id, NOT the user id and NOT the contact id. `hubmcp_owners` returns both `id` (owner_id) and `user_id` — use `id`.
 - **Portal argument accepts id or slug.** Both `9221154` and `membersolutions` resolve to the same portal via `hubmcp_portals_list`. Numeric argument → match on `id`. Alpha argument → match on `slug` or `friendly_name`.
 - **Default portal is `membersolutions`.** Say so in the header so the user notices if they meant the other one.
 - **hs_timestamp is unix ms.** Convert to a date for display and for the overdue calculation. Anything before `now()` and status ≠ `COMPLETED` is overdue.
