@@ -266,7 +266,7 @@ for entry in "${COMMANDS[@]}"; do
 
     if [ ! -f "$src" ]; then
         echo -e "  ${YELLOW}⚠${NC}  /${name} — not found in source, skipping"
-        ((SKIPPED++))
+        SKIPPED=$((SKIPPED + 1))
         continue
     fi
 
@@ -274,30 +274,30 @@ for entry in "${COMMANDS[@]}"; do
         # Check if files differ
         if diff -q "$src" "$dst" > /dev/null 2>&1; then
             echo -e "  ${GREEN}✓${NC}  /${name} — already up to date"
-            ((SKIPPED++))
+            SKIPPED=$((SKIPPED + 1))
             continue
         fi
 
         if [ "$FORCE" = true ]; then
             cp "$src" "$dst"
             echo -e "  ${YELLOW}↻${NC}  /${name} — updated (overwritten)"
-            ((UPDATED++))
+            UPDATED=$((UPDATED + 1))
         else
             echo -en "  ${YELLOW}?${NC}  /${name} — exists and differs. Overwrite? [y/N] "
             read -r response
             if [[ "$response" =~ ^[Yy]$ ]]; then
                 cp "$src" "$dst"
                 echo -e "      ${YELLOW}↻${NC}  Updated"
-                ((UPDATED++))
+                UPDATED=$((UPDATED + 1))
             else
                 echo -e "      Skipped"
-                ((SKIPPED++))
+                SKIPPED=$((SKIPPED + 1))
             fi
         fi
     else
         cp "$src" "$dst"
         echo -e "  ${GREEN}+${NC}  /${name} — installed"
-        ((INSTALLED++))
+        INSTALLED=$((INSTALLED + 1))
     fi
 done
 
@@ -334,7 +334,7 @@ for src in "${SOURCE_DIR}"/*.md; do
     if [ ! -f "$dst" ] || [ "$FORCE" = true ]; then
         cp "$src" "$dst"
         echo -e "  ${GREEN}+${NC}  /${name} — installed (extra)"
-        ((INSTALLED++))
+        INSTALLED=$((INSTALLED + 1))
     fi
 done
 
@@ -355,7 +355,7 @@ if [ -d "${SOURCE_DIR}/skills" ]; then
 
         if [ ! -f "$src" ]; then
             echo -e "  ${YELLOW}⚠${NC}  ${skill_name} — no SKILL.md, skipping"
-            ((SKILLS_SKIPPED++))
+            SKILLS_SKIPPED=$((SKILLS_SKIPPED + 1))
             continue
         fi
 
@@ -364,30 +364,30 @@ if [ -d "${SOURCE_DIR}/skills" ]; then
         if [ -f "$dst" ]; then
             if diff -q "$src" "$dst" > /dev/null 2>&1; then
                 echo -e "  ${GREEN}✓${NC}  ${skill_name} — already up to date"
-                ((SKILLS_SKIPPED++))
+                SKILLS_SKIPPED=$((SKILLS_SKIPPED + 1))
                 continue
             fi
 
             if [ "$FORCE" = true ]; then
                 cp "$src" "$dst"
                 echo -e "  ${YELLOW}↻${NC}  ${skill_name} — updated"
-                ((SKILLS_UPDATED++))
+                SKILLS_UPDATED=$((SKILLS_UPDATED + 1))
             else
                 echo -en "  ${YELLOW}?${NC}  ${skill_name} — exists and differs. Overwrite? [y/N] "
                 read -r response
                 if [[ "$response" =~ ^[Yy]$ ]]; then
                     cp "$src" "$dst"
                     echo -e "      ${YELLOW}↻${NC}  Updated"
-                    ((SKILLS_UPDATED++))
+                    SKILLS_UPDATED=$((SKILLS_UPDATED + 1))
                 else
                     echo -e "      Skipped"
-                    ((SKILLS_SKIPPED++))
+                    SKILLS_SKIPPED=$((SKILLS_SKIPPED + 1))
                 fi
             fi
         else
             cp "$src" "$dst"
             echo -e "  ${GREEN}+${NC}  ${skill_name} — installed"
-            ((SKILLS_INSTALLED++))
+            SKILLS_INSTALLED=$((SKILLS_INSTALLED + 1))
         fi
     done
 fi
@@ -411,7 +411,7 @@ CMD_TOTAL=0
 for entry in "${COMMANDS[@]}"; do
     dst_file="${entry##*:}"
     if [ -f "${COMMANDS_DIR}/${dst_file}" ]; then
-        ((CMD_TOTAL++))
+        CMD_TOTAL=$((CMD_TOTAL + 1))
     fi
 done
 SKILL_TOTAL=0
@@ -419,10 +419,10 @@ SKILL_EXPECTED=0
 if [ -d "${SOURCE_DIR}/skills" ]; then
     for skill_dir in "${SOURCE_DIR}"/skills/*/; do
         [ -d "$skill_dir" ] || continue
-        ((SKILL_EXPECTED++))
+        SKILL_EXPECTED=$((SKILL_EXPECTED + 1))
         skill_name="$(basename "$skill_dir")"
         if [ -f "${SKILLS_DIR}/${skill_name}/SKILL.md" ]; then
-            ((SKILL_TOTAL++))
+            SKILL_TOTAL=$((SKILL_TOTAL + 1))
         fi
     done
 fi
