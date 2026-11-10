@@ -1,3 +1,9 @@
+---
+name: mytodo
+description: "Show a clean, filtered view of open work items for one team member, everyone, or overdue items, read from the project's authoritative todo sources. Use when someone asks what is on their plate, someone else's todos, or what is overdue."
+argument-hint: "[name | all | overdue]"
+---
+
 # /mytodo — Accurate Per-Person Todo View
 
 Shows a clean, filtered view of all open work items for any team member. Reads from exactly two authoritative sources — no scanning, no guessing.

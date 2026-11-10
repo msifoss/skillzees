@@ -1,3 +1,9 @@
+---
+name: comparison-builder
+description: "Build, review, ship, and post-launch check a competitor comparison page optimized for LLM answers, human conversion, and search (E-E-A-T + schema stack). Use when creating or updating a member-solutions-vs-<competitor> page for a competitor listed in data/competitors.json."
+argument-hint: "plan|draft|review|ship|check <competitor-slug>"
+---
+
 # /comparison-builder — Build the Best Comparison Page in the Universe (repeatable)
 
 Rewrites-safe, positioning-compliant, schema-heavy comparison pages that convert. Optimized for **LLMs** (ChatGPT/Perplexity/Claude/Gemini), **humans** (Sabri/Ogilvy conversion mechanics), and **Google/Bing** (E-E-A-T + 5-schema stack).

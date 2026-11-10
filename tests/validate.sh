@@ -163,6 +163,38 @@ else
     fail "install.sh re-run exited non-zero"
 fi
 rm -rf "$SMOKE_HOME"
+# Test 8: Every skill has frontmatter with name + description
+# --------------------------------------------------------------------------
+# Without a `description`, Claude cannot decide when to use a skill, so it
+# only works when typed as /name. `name` must match the directory.
+echo "8. Skill frontmatter"
+
+for skill_md in "${SCRIPT_DIR}"/skills/*/SKILL.md; do
+    [ -f "$skill_md" ] || continue
+    skill_name="$(basename "$(dirname "$skill_md")")"
+
+    # tr -d '\r' tolerates CRLF files, which Claude Code loads fine
+    if [ "$(head -1 "$skill_md" | tr -d '\r')" != "---" ]; then
+        fail "skills/${skill_name}: missing frontmatter (first line must be ---)"
+        continue
+    fi
+
+    # Frontmatter = lines between the first and second ---
+    fm="$(tr -d '\r' < "$skill_md" | awk 'NR==1{next} /^---[[:space:]]*$/{exit} {print}')"
+
+    fm_name="$(printf '%s\n' "$fm" | sed -n 's/^name:[[:space:]]*//p' | head -1 | tr -d "\"'")"
+    if [ "$fm_name" = "$skill_name" ]; then
+        pass "skills/${skill_name}: name matches directory"
+    else
+        fail "skills/${skill_name}: name '${fm_name}' does not match directory"
+    fi
+
+    if printf '%s\n' "$fm" | grep -qE '^description:[[:space:]]*[^[:space:]]'; then
+        pass "skills/${skill_name}: has description"
+    else
+        fail "skills/${skill_name}: missing or empty description"
+    fi
+done
 
 echo ""
 

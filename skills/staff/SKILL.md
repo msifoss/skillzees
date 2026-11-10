@@ -1,3 +1,9 @@
+---
+name: staff
+description: "Convene a staff engineer panel (4 engineers + Will Larson moderating) to independently analyze a technical problem, vote, and produce a consensus decision with an implementation plan saved to docs/key_findings/. Use for architectural questions, build-vs-buy or refactor trade-offs, or deciding how to fix a finding."
+argument-hint: "<problem | file path | finding reference>"
+---
+
 # /staff — Staff Engineer Panel Analysis
 
 Convene a panel of 4 staff engineers from top tech companies + Will Larson as moderator to independently analyze a technical problem, debate options, and produce a consensus decision with implementation plan.

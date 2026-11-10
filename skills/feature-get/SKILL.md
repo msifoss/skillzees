@@ -1,3 +1,9 @@
+---
+name: feature-get
+description: "Fetch feature requests submitted by weeklyops-prompt users, group them by theme, and present them to developers for triage. Use in the weeklyops repo when reviewing the platform enhancement queue."
+argument-hint: "[--all]"
+---
+
 # /feature-get — Pull Platform Enhancement Ideas
 
 Fetch feature requests submitted by weeklyops-prompt users, group by theme, and present to developers for triage. Runs in the weeklyops repo.

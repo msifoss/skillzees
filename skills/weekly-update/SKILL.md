@@ -1,3 +1,9 @@
+---
+name: weekly-update
+description: "Synthesize a person's weekly inputs (email scan, calendar summary, supporting docs) with live OKR data into a structured self-review of what moved, what stalled, and next commitments. Use for an OKR-disciplined weekly update for a given week's folder."
+argument-hint: "[date-range] [--narrative]"
+---
+
 # /weekly-update — OKR-Disciplined Weekly Self-Review
 
 Synthesize a person's weekly inputs (email scan, calendar summary, supporting docs) with live OKR data into a structured self-review that surfaces what moved, what stalled, and what to commit to next.

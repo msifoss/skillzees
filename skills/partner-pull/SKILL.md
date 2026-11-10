@@ -1,3 +1,9 @@
+---
+name: partner-pull
+description: "Pull every HubSpot artifact tied to a 97 Display referral partner (contact, company, all engagements, property history) and produce five analyst-grade markdown deliverables under docs/partner_program/clients/<slug>/. Use for a deep dive on a referral partner relationship."
+argument-hint: "<contact-id> [<company-id>]"
+---
+
 # /partner-pull — Partner Deep-Dive Data Pull
 
 Pulls every HubSpot artifact tied to a 97 Display referral partner — contact + company + all engagement object types + property history — and produces five analyst-grade markdown deliverables under `docs/partner_program/clients/<slug>/`.

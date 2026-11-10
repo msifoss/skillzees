@@ -1,3 +1,9 @@
+---
+name: test-cycle
+description: "Run the dev, test, report, backlog quality loop after code changes: unit tests, type-check, and Playwright E2E, then log results and update the backlog. Use after making code changes, or to loop fix-and-retest until green."
+argument-hint: "[quick | e2e | e2e:prod | report | loop]"
+---
+
 # /test-cycle — Dev → Test → Report → Backlog Loop
 
 Automated quality cycle that runs after code changes. Tests the platform, logs results, updates the backlog, and feeds findings back into the next dev cycle.

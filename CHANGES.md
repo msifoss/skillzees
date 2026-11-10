@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Synced 57 skills from global + repo-local sources — now 94 skills total (feat/sync-external-skills sweep, 2026-07-25)
 - New skills: `changeloggy` (date-bucketed git activity), `gitsmith` (session git-hygiene agent), `wrapit` (session recap under docs/wrapit/)
 - Wired Librarian, Sentinel, and Evolver agents into the `bolt-lfg` pipeline
+- YAML frontmatter (`name`, `description`, and `argument-hint` where the skill documents arguments) for 11 skills that had none, so Claude can auto-trigger them: `chealth`, `comparison-builder`, `feature-get`, `ingest`, `mytodo`, `partner-pull`, `pm`, `prodstatus`, `staff`, `test-cycle`, `weekly-update`
+- `tests/validate.sh` test 8: every `skills/*/SKILL.md` must open with frontmatter whose `name` matches its directory and whose `description` is non-empty
 
 ### Changed
 - `README.md` command count corrected from 30 → 33; added `/compose`, `/dlc-loop`, `/route` entries

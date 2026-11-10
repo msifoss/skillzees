@@ -1,3 +1,8 @@
+---
+name: prodstatus
+description: "Read-only CallHero production health dashboard for both stacks (resources, queues, alarms, costs) with warning markers. Use for a quick health check before or after a deploy, when investigating an alarm or incident, or for a weekly status review."
+---
+
 # /prodstatus — CallHero Production Health Dashboard
 
 > **CONFIDENTIAL** — This skill contains internal infrastructure references (resource names, stack identifiers, queue names). Do not share outside the team or commit to public repositories.
