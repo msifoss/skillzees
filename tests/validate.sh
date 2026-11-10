@@ -124,6 +124,49 @@ done < <(grep -E '^\s+"[a-z].*\.md:' "${SCRIPT_DIR}/install.sh")
 echo ""
 
 # --------------------------------------------------------------------------
+# Test 7: install.sh actually runs end-to-end into a scratch HOME
+# --------------------------------------------------------------------------
+# `bash -n` only checks syntax. This catches runtime aborts such as
+# `set -e` + `((VAR++))` exiting on the first increment from 0.
+echo "7. Installer smoke test (fresh HOME)"
+
+SMOKE_HOME="$(mktemp -d)"
+if HOME="$SMOKE_HOME" bash "${SCRIPT_DIR}/install.sh" --from "$SCRIPT_DIR" </dev/null >"${SMOKE_HOME}/install.log" 2>&1; then
+    pass "install.sh exits 0 on a fresh HOME"
+else
+    fail "install.sh exited non-zero on a fresh HOME (see ${SMOKE_HOME}/install.log)"
+fi
+
+EXPECTED_CMDS=$(grep -cE '^\s+"[a-z].*\.md:' "${SCRIPT_DIR}/install.sh")
+GOT_CMDS=0
+while IFS= read -r line; do
+    dst_file=$(echo "$line" | sed 's/.*:\(.*\)".*/\1/')
+    [ -f "${SMOKE_HOME}/.claude/commands/${dst_file}" ] && GOT_CMDS=$((GOT_CMDS + 1))
+done < <(grep -E '^\s+"[a-z].*\.md:' "${SCRIPT_DIR}/install.sh")
+if [ "$GOT_CMDS" -eq "$EXPECTED_CMDS" ]; then
+    pass "all ${EXPECTED_CMDS} commands installed"
+else
+    fail "only ${GOT_CMDS}/${EXPECTED_CMDS} commands installed"
+fi
+
+EXPECTED_SKILLS=$(ls -d "${SCRIPT_DIR}"/skills/*/ 2>/dev/null | wc -l | tr -d ' ')
+GOT_SKILLS=$(ls "${SMOKE_HOME}"/.claude/skills/*/SKILL.md 2>/dev/null | wc -l | tr -d ' ')
+if [ "$GOT_SKILLS" -eq "$EXPECTED_SKILLS" ]; then
+    pass "all ${EXPECTED_SKILLS} skills installed"
+else
+    fail "only ${GOT_SKILLS}/${EXPECTED_SKILLS} skills installed"
+fi
+
+if HOME="$SMOKE_HOME" bash "${SCRIPT_DIR}/install.sh" --from "$SCRIPT_DIR" </dev/null >/dev/null 2>&1; then
+    pass "install.sh re-run (already up to date) exits 0"
+else
+    fail "install.sh re-run exited non-zero"
+fi
+rm -rf "$SMOKE_HOME"
+
+echo ""
+
+# --------------------------------------------------------------------------
 # Summary
 # --------------------------------------------------------------------------
 echo "========================="

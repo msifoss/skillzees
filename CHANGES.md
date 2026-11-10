@@ -17,6 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `README.md` command count corrected from 30 → 33; added `/compose`, `/dlc-loop`, `/route` entries
 - `SECURITY.md` supported-versions table updated to 3.0.0
 
+### Fixed
+- `install.sh` aborted after the first install on a fresh machine: `((VAR++))` returns status 1 when VAR is 0, which `set -e` treats as fatal. Counters now use `VAR=$((VAR + 1))` (the pattern `tests/validate.sh` already uses)
+- `tests/validate.sh` test 7 runs the installer end-to-end into a scratch HOME so runtime aborts are caught, not just syntax errors
+
 ## [3.0.0] - 2026-04-04
 
 ### Added
