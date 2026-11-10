@@ -1,3 +1,8 @@
+---
+name: pm
+description: "Project management review: read current project state, identify what changed, and update the PM docs (current sprint, backlog, sprint log) under docs/pm/, bootstrapping them on first run. Use at session start, after completing work, or at session end."
+---
+
 # /pm — Project Management Update
 
 Run a PM review of the current project. Read current state, identify what's changed, and update all PM docs to stay current.

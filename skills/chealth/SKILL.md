@@ -1,3 +1,8 @@
+---
+name: chealth
+description: "Read-only CallHero comprehensive health check across the AWS stack (including CloudFront and WAF), presented as a dashboard with WARN/FAIL markers. Use as a pre-deploy health gate, for post-deploy verification, incident triage, or a daily/weekly health review."
+---
+
 # /chealth — CallHero Comprehensive Health Check
 
 > **CONFIDENTIAL** — Contains internal infrastructure references. Do not share outside the team.

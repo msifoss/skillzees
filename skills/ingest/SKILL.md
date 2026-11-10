@@ -1,3 +1,9 @@
+---
+name: ingest
+description: "Diagnose and fill gaps in the CallHero data pipeline (transcript, embedding, quality, enrichment, classification) on dev and/or prod, then prove parity. Use when the user says ingest, sync, catchup, backfill, embed, classify, vectorize, or parity check, or after a data lake backfill."
+argument-hint: "[just dev | prod only | stage...]"
+---
+
 # /ingest — CallHero Data Pipeline
 
 > Diagnose gaps, fill them, prove parity. One command for the entire transcript → embedding → quality → enrichment → classification pipeline.
